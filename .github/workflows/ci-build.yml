@@ -1,0 +1,52 @@
+name: .NET Docker CI
+
+on:
+  push:
+    branches:
+      - main
+env:
+  DOCKER_IMAGE_NAME: gitopsdemo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+    # Step 1: Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # # Step 2: Set up .NET environment
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v4
+    #   with:
+    #     dotnet-version: '8.x' # Change this based on the .NET version you use
+
+    # # Step 3: Restore dependencies
+    # - name: Restore dependencies
+    #   run: dotnet restore
+
+    # # Step 4: Build the project
+    # - name: Build
+    #   run: dotnet build --no-restore --configuration Release
+
+    # Step 7: Log into GitHub Container Registry
+    - name: Log in to GitHub Container Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    # Step 8: Build Docker image and tag with Git hash
+    - name: Build Docker image
+      run: |
+        GIT_HASH=$(git rev-parse --short HEAD)
+        docker build -f src/GitopsDemoApi/Dockerfile -t ghcr.io/${{ github.repository }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
+    
+    # Step 9: Push Docker image to GitHub Container Registry
+    - name: Push Docker image
+      run: |
+        GIT_HASH=$(git rev-parse --short HEAD)
+        docker push ghcr.io/${{ github.repository }}/${DOCKER_IMAGE_NAME}:${GIT_HASH}
