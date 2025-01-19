@@ -4,7 +4,7 @@ metadata:
   name: gitopsdemo
 spec:
   selector:
-    app.kubernetes.io/name: gitopsdemo
+    app: gitopsdemo
   ports:
     - port: 8080
       targetPort: 8080

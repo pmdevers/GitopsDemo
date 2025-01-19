@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: gitopsdemo
   labels:
-    app.kubernetes.io/name: gitopsdemo
+    app: gitopsdemo
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:

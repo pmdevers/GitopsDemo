@@ -3,11 +3,11 @@ kind: Deployment
 metadata:
   name: gitopsdemo-deployment
   labels:
-    app.kubernetes.io/name: gitopsdemo
+    app: gitopsdemo
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: gitopsdemo
+      app: gitopsdemo
   template:
     spec:
       restartPolicy: Always
