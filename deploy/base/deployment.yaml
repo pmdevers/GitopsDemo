@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitopsdemo-deployment
+  labels:
+    app.kubernetes.io/name: gitopsdemo
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gitopsdemo
+  template:
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: gitopsdemo
+          image: ghcr.io/pmdevers/gitopsdemo:cb6cf48
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 100m
+            limits:
+              memory: 2Gi
+              cpu: 2000m
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
