@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: gitopsdemo
-          image: ghcr.io/pmdevers/gitopsdemo:cb6cf48
+          image: ghcr.io/pmdevers/gitopsdemo:9d70bd6
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Production
