@@ -9,6 +9,9 @@ spec:
     matchLabels:
       app: gitopsdemo
   template:
+    metadata:
+      labels:
+        app: gitopsdemo
     spec:
       restartPolicy: Always
       containers:
