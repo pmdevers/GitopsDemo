@@ -9,7 +9,7 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /
+          - path: /gitopsdemo
             pathType: Prefix
             backend:
               service:
