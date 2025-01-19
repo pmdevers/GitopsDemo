@@ -58,6 +58,6 @@ jobs:
     - name: Tag and push Docker image with release name
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
-        docker pull ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${GIT_HASH}
-        docker tag ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${GIT_HASH} ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${{ github.ref_name }}
-        docker push ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${{ github.ref_name }}
+        docker pull ghcr.io/gitopsdemo/${DOCKER_IMAGE_NAME}:${GIT_HASH}
+        docker tag ghcr.io/gitopsdemo/${DOCKER_IMAGE_NAME}:${GIT_HASH} ghcr.io/gitopsdemo/${DOCKER_IMAGE_NAME}:${{ github.ref_name }}
+        docker push ghcr.io/gitopsdemo/${DOCKER_IMAGE_NAME}:${{ github.ref_name }}

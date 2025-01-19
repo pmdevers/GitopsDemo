@@ -43,10 +43,10 @@ jobs:
     - name: Build Docker image
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
-        docker build -f src/GitopsDemoApi/Dockerfile -t ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
+        docker build -f src/GitopsDemoApi/Dockerfile -t ghcr.io/gitopsdemo/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
     
     # Step 9: Push Docker image to GitHub Container Registry
     - name: Push Docker image
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
-        docker push ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${GIT_HASH}
+        docker push ghcr.io/gitopsdemo/${DOCKER_IMAGE_NAME}:${GIT_HASH}
