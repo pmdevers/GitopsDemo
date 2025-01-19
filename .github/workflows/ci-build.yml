@@ -35,10 +35,6 @@ jobs:
     # - name: Build
     #   run: dotnet build --no-restore --configuration Release
 
-    - id: lower-repo
-      run: |
-        echo "IMAGE=${GITHUB_REPOSITORY@L}" >> $GITHUB_OUTPUT
-
     # Step 7: Log into GitHub Container Registry
     - name: Log in to GitHub Container Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -47,10 +43,10 @@ jobs:
     - name: Build Docker image
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
-        docker build -f src/GitopsDemoApi/Dockerfile -t ghcr.io/${{ steps.lower-repo.outputs.repository }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
+        docker build -f src/GitopsDemoApi/Dockerfile -t ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
     
     # Step 9: Push Docker image to GitHub Container Registry
     - name: Push Docker image
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
-        docker push ghcr.io/${{ steps.lower-repo.outputs.repository }}/${DOCKER_IMAGE_NAME}:${GIT_HASH}
+        docker push ghcr.io/homelab/${DOCKER_IMAGE_NAME}:${GIT_HASH}
