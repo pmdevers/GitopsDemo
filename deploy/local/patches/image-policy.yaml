@@ -3,7 +3,7 @@
   value:
     numerical:
       order: asc
-- op: add
+- op: replace
   path: /spec/filterTags
   value: 
     pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
