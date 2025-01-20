@@ -4,7 +4,7 @@ metadata:
   name: gitopsdemo
   namespace: gitopsdemo
 spec:
-  interval: 30m
+  interval: 10m
   sourceRef:
     kind: GitRepository
     name: gitopsdemo
