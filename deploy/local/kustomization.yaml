@@ -9,3 +9,7 @@ patches:
   target:
     kind: HorizontalPodAutoscaler
     name: gitopsdemo
+- path: patches/image-policy.yaml
+  target:
+    kind: ImagePolicy
+    name: gitopsdemo
