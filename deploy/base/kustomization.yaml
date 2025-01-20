@@ -11,3 +11,4 @@ resources:
   - hpa.yaml
   - image-repository.yaml
   - image-policy.yaml
+  - image-automation.yaml

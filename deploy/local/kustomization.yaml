@@ -13,3 +13,8 @@ patches:
   target:
     kind: ImagePolicy
     name: gitopsdemo
+
+images:
+- name: ghcr.io/pmdevers/gitopsdemo
+  newName: ghcr.io/pmdevers/gitopsdemo # {"$imagepolicy": "gitopsdemo:gitopsdemo:name"}
+  newTag: main-fd92973-1737405445 # {"$imagepolicy": "gitopsdemo:gitopsdemo:tag"}
