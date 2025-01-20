@@ -26,7 +26,15 @@ jobs:
 
     - name: Log in to GitHub Container Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
+    
+    - name: Build and push Docker image if not exists
+      run: |
+        GIT_HASH=$(git rev-parse --short HEAD)
+        if ! docker pull ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH}; then
+          docker build -t ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
+          docker push ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH}
+        fi
+        
     - name: Tag and push Docker image with release name
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
