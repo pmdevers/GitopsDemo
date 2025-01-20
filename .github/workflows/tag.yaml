@@ -31,7 +31,7 @@ jobs:
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
         if ! docker pull ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH}; then
-          docker build -t ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
+          docker build -f src/GitopsDemoApi/Dockerfile -t ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} 
           docker push ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH}
         fi
         
