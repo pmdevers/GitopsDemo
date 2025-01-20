@@ -1,0 +1,9 @@
+- op: replace 
+  path: "/spec/policy" 
+  value:
+    numerical:
+      order: asc
+- op: add
+  path: /spec/filterTags
+  value: 
+    pattern: '[a-f0-9]+'
