@@ -13,6 +13,10 @@ patches:
   target:
     kind: ImagePolicy
     name: gitopsdemo
+- path: patches/image-automation.yaml
+  target:
+    kind: ImageUpdateAutomation
+    name: gitopsdemo
 
 images:
 - name: ghcr.io/pmdevers/gitopsdemo
