@@ -6,6 +6,7 @@ on:
       - 'v*'
 env:
   DOCKER_IMAGE_NAME: gitopsdemo
+  GH_TOKEN: ${{ github.token }}
 
 jobs:
   build:
@@ -16,45 +17,16 @@ jobs:
       packages: write
 
     steps:
-    # Step 1: Checkout code
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # # Step 2: Download the build artifacts to include them in the release
-    # - name: Download build artifacts
-    #   uses: actions/download-artifact@v4
-    #   with:
-    #     path: ./output
-    #     name: win-x64
-
-    # Step 3: Create GitHub release
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          Release version ${{ github.ref }}.
-        draft: false
-        prerelease: false
+      run: |
+        gh release create ${{ github.ref }} --title "Release ${{ github.ref }}" --generate-notes
 
-    # # Step 4: Upload build artifacts to the release
-    # - name: Upload build artifacts to release
-    #   uses: actions/upload-release-asset@v1
-    #   with:
-    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-    #     asset_path: ./output/KubernetesOperator.exe
-    #     asset_name: win-x64.zip
-    #     asset_content_type: application/zip
-
-    # Step 5: Log into GitHub Container Registry
     - name: Log in to GitHub Container Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-    # Step 6: Retag Docker image with the release name and push
     - name: Tag and push Docker image with release name
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
