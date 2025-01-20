@@ -44,11 +44,11 @@ jobs:
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
         docker build -f src/GitopsDemoApi/Dockerfile -t ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} .
-        docker tag ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s)
+        docker tag ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH} ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${{ github.ref_name }}-${GIT_HASH}-$(date +%s)
 
     # Step 9: Push Docker image to GitHub Container Registry
     - name: Push Docker image
       run: |
         GIT_HASH=$(git rev-parse --short HEAD)
         docker push ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_HASH}
-        docker push ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s)
+        docker push ghcr.io/${{ github.actor }}/${DOCKER_IMAGE_NAME}:${{ github.ref_name }}-${GIT_HASH}-$(date +%s)
