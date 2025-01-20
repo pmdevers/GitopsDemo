@@ -1,7 +1,11 @@
-name: Staging Auto-PR
+name: Flux Auto-PR
 on:
-  create:
-    branches: ['flux-image-updates']
+  push:
+    branches:
+      - flux-image-updates
+
+permissions:
+  pull-requests: write
 
 jobs:
   pull-request:
@@ -10,13 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       name: checkout
-
-    - uses: repo-sync/pull-request@v2
-      name: pull-request
-      with:
-        destination_branch: "main"
-        pr_title: "Pulling ${{ github.ref }} into main"
-        pr_body: ":crown: *An automated PR*"
-        pr_reviewer: "pmdevers"
-        pr_draft: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: pull-request
+      run: |
+        gh_pr_up() { gh pr create $* || gh pr edit $* }
+        gh_pr_up --title "Pulling ${{ github.ref }} into main" --body ":crown: *An automated PR*"
