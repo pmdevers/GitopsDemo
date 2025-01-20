@@ -14,4 +14,4 @@ patches:
 images:
 - name: ghcr.io/pmdevers/gitopsdemo
   newName: ghcr.io/pmdevers/gitopsdemo # {"$imagepolicy": "gitopsdemo:gitopsdemo:name"}
-  newTag: main-224a1d0-1737408787 # {"$imagepolicy": "gitopsdemo:gitopsdemo:tag"}
+  newTag: main-8191d37-1737409314 # {"$imagepolicy": "gitopsdemo:gitopsdemo:tag"}
