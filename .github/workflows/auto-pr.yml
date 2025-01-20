@@ -19,4 +19,4 @@ jobs:
       name: checkout
     - name: pull-request
       run: |
-        gh pr create --title "Pull request title" --body "Pull request body"
+        gh pr create --title "Pulling ${{ github.ref }} into main" --body ":crown: *An automated PR*"
