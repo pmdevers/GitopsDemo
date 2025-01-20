@@ -2,8 +2,18 @@ apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageUpdateAutomation
 metadata:
   name: gitopsdemo
+  namespace: gitopsdemo
 spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: gitopsdemo
   git:
+    checkout:
+      ref:
+        branch: main
+    push:
+      branch: flux-image-updates
     commit:
       messageTemplate: |
         Automated image update
