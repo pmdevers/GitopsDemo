@@ -6,7 +6,7 @@ metadata:
     app: gitopsdemo
 spec:
   rules:
-    - host: localhost
+    - host: www.patrick-evers.nl
       http:
         paths:
           - path: /gitopsdemo
