@@ -17,6 +17,10 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      packages: write
+
     steps:
       - name: Docker meta
         id: meta
@@ -42,7 +46,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
